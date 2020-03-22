@@ -30,7 +30,7 @@ You can enable hidepw-mode automatically on `.gpg` files with:
 
 ```
 (add-to-list 'auto-mode-alist
-             '("\\.gpg\\'" . (lambda () (hidepw-mode))))
+             '("\\.gpg\\'" . hidepw-mode))
 ```
 
 ## Notes:
