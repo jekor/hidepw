@@ -1,10 +1,10 @@
 ;;; hidepw.el --- Minor mode to hide passwords
 
 ;; Author: Chris Forno <jekor@jekor.com>
-;; Package-Version: 0.1.0
+;; Package-Version: 0.2.0
 ;; Keywords: hide, hidden, password
 
-;; Copyright (C) 2014, Chris Forno
+;; Copyright (C) 2014, 2020 Chris Forno
 ;; All rights reserved.
 ;;
 ;; Redistribution and use in source and binary forms, with or without
@@ -42,11 +42,11 @@
 ;; By default, passwords are marked by delimiting them with pipes (|).
 ;; For example:
 ;;
-;; root: |supersecret|
+;; root: [supersecret]
 ;;
 ;; will display as
 ;;
-;; root: |******|
+;; root: [******]
 ;;
 ;; You can customize hidepw-pattern to match against arbitrary regular
 ;; expressions. Just make sure to include one capturing group (\(\))
@@ -76,9 +76,9 @@
 
 (defgroup hidepw nil "Settings for hiding passwords")
 
-(defcustom hidepw-pattern "|\\(.*\\)|"
-  "Pattern for identifying a password (must contain 1 capturing group)"
-  :type 'regexp
+(defcustom hidepw-patterns '("\\[\\(.*\\)\\]")
+  "Patterns for identifying a password (must contain 1 capturing group)"
+  :type '(repeat regexp)
   :group 'hidepw)
 
 (defcustom hidepw-mask "******"
@@ -87,7 +87,7 @@
   :group 'hidepw)
 
 (defun hidepw-font-lock-keywords ()
-  `((,hidepw-pattern 1 (hidepw-render))))
+  (mapcar (lambda (pat) `(,pat 1 (hidepw-render))) hidepw-patterns))
 
 (defun hidepw-render ()
   "Render a password (hidden)."

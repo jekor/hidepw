@@ -8,20 +8,20 @@ prevent shoulder surfing.
 When enabled, any passwords will appear as ******, but you'll still be
 able to copy the password to the clipboard.
 
-By default, passwords are marked by delimiting them with pipes (|).
+By default, passwords are marked by delimiting them with braces ([]).
 For example:
 
 ```
-root: |supersecret|
+root: [supersecret]
 ```
 
 will display as
 
 ```
-root: |******|
+root: [******]
 ```
 
-You can customize hidepw-pattern to match against arbitrary regular
+You can customize hidepw-patterns to match against arbitrary regular
 expressions. Just make sure to include one capturing group (`\(\)`),
 since the group marks the actual password. You can also customize the
 mask (******) that obscures the password.
