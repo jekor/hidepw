@@ -1,8 +1,9 @@
-;;; hidepw.el --- Minor mode to hide passwords
+;;; hidepw.el --- Minor mode to hide passwords  -*- lexical-binding: t; -*-
 
 ;; Author: Chris Forno <jekor@jekor.com>
 ;; Package-Version: 0.2.0
-;; Keywords: hide, hidden, password
+;; Keywords: hide, hidden, password, faces
+;; URL: https://github.com/jekor/hidepw
 
 ;; Copyright (C) 2014, 2020 Chris Forno
 ;; All rights reserved.
@@ -31,7 +32,7 @@
 
 ;;; Commentary:
 
-;; This is a minor mode for hiding passwords. It's useful if you
+;; This is a minor mode for hiding passwords.  It's useful if you
 ;; manage your passwords in text files (perhaps automatically
 ;; encrypted and decrypted by EasyPG) and want to prevent shoulder
 ;; surfing.
@@ -49,8 +50,8 @@
 ;; root: [******]
 ;;
 ;; You can customize hidepw-pattern to match against arbitrary regular
-;; expressions. Just make sure to include one capturing group (\(\))
-;; since the group marks the actual password. You can also customize
+;; expressions.  Just make sure to include one capturing group (\(\))
+;; since the group marks the actual password.  You can also customize
 ;; the mask (******) that obscures the password.
 ;;
 ;; You can enable hidepw-mode automatically on .gpg files with:
@@ -62,7 +63,7 @@
 ;;
 ;; You won't be able to move the cursor within the password (it will
 ;; behave like a single character), but deleting the delimiter from
-;; either side will reveal the password and make it editable. Just add
+;; either side will reveal the password and make it editable.  Just add
 ;; the delimiter back to hide it again.
 ;;
 ;; This mode turns on font-lock-mode (and won't turn it off when you
@@ -74,19 +75,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; User Variables:
 
-(defgroup hidepw nil "Settings for hiding passwords")
+(defgroup hidepw nil "Settings for hiding passwords."
+  :group 'text)
 
 (defcustom hidepw-patterns '("\\[\\(.*\\)\\]")
-  "Patterns for identifying a password (must contain 1 capturing group)"
+  "Patterns for identifying a password (must contain 1 capturing group)."
   :type '(repeat regexp)
   :group 'hidepw)
 
 (defcustom hidepw-mask "******"
-  "String to obscure passwords with"
+  "String to obscure passwords with."
   :type 'string
   :group 'hidepw)
 
 (defun hidepw-font-lock-keywords ()
+  "Define the patterns to mask via font-lock."
   (mapcar (lambda (pat) `(,pat 1 (hidepw-render))) hidepw-patterns))
 
 (defun hidepw-render ()
@@ -95,13 +98,13 @@
          display ,hidepw-mask))
 
 (defun hidepw-turn-on ()
-  "Turn on hidepw-mode."
+  "Turn on `hidepw-mode'."
   (let ((props (make-local-variable 'font-lock-extra-managed-props)))
     (add-to-list props 'display))
   (font-lock-add-keywords nil (hidepw-font-lock-keywords)))
 
 (defun hidepw-turn-off ()
-  "Turn off hidepw-mode."
+  "Turn off `hidepw-mode'."
   (font-lock-remove-keywords nil (hidepw-font-lock-keywords)))
 
 ;;;###autoload

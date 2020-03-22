@@ -2,7 +2,7 @@
 
 This is an Emacs minor mode for hiding passwords. It's useful if you
 manage your passwords in text files (perhaps automatically encrypted
-and decrypted by [EasyPG](http://epg.sourceforge.jp/)) and want to
+and decrypted by [EasyPG](https://epg.osdn.jp/index.html.en)) and want to
 prevent shoulder surfing.
 
 When enabled, any passwords will appear as ******, but you'll still be
