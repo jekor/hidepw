@@ -40,7 +40,7 @@
 ;; When enabled, any passwords will appear as ******, but you'll still
 ;; be able to copy the password to the clipboard.
 ;;
-;; By default, passwords are marked by delimiting them with pipes (|).
+;; By default, passwords are marked by delimiting them with braces ([]).
 ;; For example:
 ;;
 ;; root: [supersecret]
@@ -56,8 +56,7 @@
 ;;
 ;; You can enable hidepw-mode automatically on .gpg files with:
 ;;
-;; (add-to-list 'auto-mode-alist
-;;              '("\\.gpg\\'" . (lambda () (hidepw-mode))))
+;; (add-to-list 'auto-mode-alist '("\\.gpg\\'" . hidepw-mode))
 ;;
 ;; Notes:
 ;;

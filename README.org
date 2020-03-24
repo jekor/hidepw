@@ -1,39 +1,33 @@
-# hidepw - an Emacs minor mode for hiding passwords
+#+TITLE: hidepw - an Emacs minor mode for hiding passwords
 
 This is an Emacs minor mode for hiding passwords. It's useful if you
 manage your passwords in text files (perhaps automatically encrypted
-and decrypted by [EasyPG](https://epg.osdn.jp/index.html.en)) and want to
-prevent shoulder surfing.
+and decrypted by [[https://epg.osdn.jp/index.html.en][EasyPG]]) and want to prevent shoulder surfing.
 
-When enabled, any passwords will appear as ******, but you'll still be
+When enabled, any passwords will appear as =******=, but you'll still be
 able to copy the password to the clipboard.
 
-By default, passwords are marked by delimiting them with braces ([]).
+By default, passwords are marked by delimiting them with braces (=[]=).
 For example:
 
-```
-root: [supersecret]
-```
+: root: [supersecret]
 
 will display as
 
-```
-root: [******]
-```
+: root: [******]
 
 You can customize hidepw-patterns to match against arbitrary regular
-expressions. Just make sure to include one capturing group (`\(\)`),
+expressions. Just make sure to include one capturing group (~()~),
 since the group marks the actual password. You can also customize the
-mask (******) that obscures the password.
+mask (=******=) that obscures the password.
 
-You can enable hidepw-mode automatically on `.gpg` files with:
+You can enable ~hidepw-mode~ automatically on `.gpg` files with:
 
-```
-(add-to-list 'auto-mode-alist
-             '("\\.gpg\\'" . hidepw-mode))
-```
+#+begin_src elisp
+(add-to-list 'auto-mode-alist '("\\.gpg\\'" . hidepw-mode))
+#+end_src
 
-## Notes:
+* Notes
 
 You won't be able to move the cursor within the password (it will
 behave like a single character), but deleting the delimiter from
