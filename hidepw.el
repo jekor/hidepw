@@ -58,6 +58,26 @@
 ;;
 ;; (add-to-list 'auto-mode-alist '("\\.gpg\\'" . hidepw-mode))
 ;;
+;; Using with pass (https://www.passwordstore.org/):
+;;
+;; pass requires that the first line of the file is a password.  To hide
+;; the first line, customize the hidepw-hide-first-line variable.
+;;
+;; Differences from password-mode (https://github.com/juergenhoetzel/password-mode/):
+;;
+;; |                   | password-mode   | hidepw                    |
+;; |-------------------+-----------------+---------------------------|
+;; | hiding via        | overlay         | font-lock                 |
+;; | password input    | password prompt | normal input              |
+;; | match via         | prefix regexp   | regexp with capture group |
+;; | multiple patterns | yes             | yes                       |
+;; | supports pass     | no              | yes                       |
+;;
+;; While the password prompt is a nice feature of password-mode, I found
+;; it to be difficult to use and that it could get into inconsistent states.
+;; If you'd like to input passwords without them ever being visible, input the
+;; delimiters ([]) first and then input the password between them.
+;;
 ;; Notes:
 ;;
 ;; You won't be able to move the cursor within the password (it will
