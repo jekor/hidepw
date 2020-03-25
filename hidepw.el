@@ -1,7 +1,7 @@
 ;;; hidepw.el --- Minor mode to hide passwords  -*- lexical-binding: t; -*-
 
 ;; Author: Chris Forno <jekor@jekor.com>
-;; Package-Version: 0.2.0
+;; Package-Version: 0.3.0
 ;; Keywords: hide, hidden, password, faces
 ;; URL: https://github.com/jekor/hidepw
 
@@ -87,9 +87,16 @@
   :type 'string
   :group 'hidepw)
 
+(defcustom hidepw-hide-first-line nil
+  "Hide the first line of the buffer.  Useful if you're using pass."
+  :type 'boolean
+  :group 'hidepw
+  :link '(url-link "https://www.passwordstore.org/"))
+
 (defun hidepw-font-lock-keywords ()
   "Define the patterns to mask via font-lock."
-  (mapcar (lambda (pat) `(,pat 1 (hidepw-render))) hidepw-patterns))
+  (mapcar (lambda (pat) `(,pat 1 (hidepw-render)))
+          `(,@hidepw-patterns ,@(when hidepw-hide-first-line '("\\`\\(.*\\)$")))))
 
 (defun hidepw-render ()
   "Render a password (hidden)."
@@ -107,8 +114,7 @@
   (font-lock-remove-keywords nil (hidepw-font-lock-keywords)))
 
 ;;;###autoload
-(define-minor-mode
-  hidepw-mode
+(define-minor-mode hidepw-mode
   "Hide passwords."
   :lighter " HidePW"
   (progn
