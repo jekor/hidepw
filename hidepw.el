@@ -77,8 +77,12 @@
 (defgroup hidepw nil "Settings for hiding passwords."
   :group 'text)
 
-(defcustom hidepw-patterns '("\\[\\(.*\\)\\]")
-  "Patterns for identifying a password (must contain 1 capturing group)."
+(defcustom hidepw-patterns '("\\[\\(.+\\)\\]")
+  "Patterns for identifying a password (must contain 1 capturing group).
+
+If you keep multiple passwords on a line, you can use non-greedy
+capturing groups (.+?) but you must use a closing delimiter that
+does not appear in your passwords."
   :type '(repeat regexp)
   :group 'hidepw)
 
