@@ -40,12 +40,15 @@ the first line, customize the ~hidepw-hide-first-line~ variable.
 | password input    | password prompt | normal input              |
 | match via         | prefix regexp   | regexp with capture group |
 | multiple patterns | yes             | yes                       |
-| supports pass     | no              | yes                       |
+| supports pass     | no*             | yes                       |
 
 While the password prompt is a nice feature of ~password-mode~, I found
 it to be difficult to use and that it could get into inconsistent states.
 If you'd like to input passwords without them ever being visible, input the
 delimiters (~[]~) first and then input the password between them.
+
+=*= It might be possible to use pass with password-mode with the right
+regexp.
 
 * Notes
 
